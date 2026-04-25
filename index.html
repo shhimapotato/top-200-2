@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0a0d14">
+<title>Top 200 Drug Reference — Quizzes 7–12</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700;1,900&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0d14;
+    --bg-2: #0e131e;
+    --bg-3: #131826;
+    --grid: rgba(255, 255, 255, 0.03);
+    --text: #f4f5f8;
+    --text-dim: #8b93a7;
+    --text-faint: #525a6e;
+    --accent: #7bb6f0;
+    --accent-2: #4a90e2;
+    --cyan: #6ed4ff;
+    --border: rgba(255, 255, 255, 0.08);
+    --border-2: rgba(255, 255, 255, 0.14);
+    --row-hover: rgba(255, 255, 255, 0.03);
+
+    /* Per-quiz palette */
+    --q7-color:  #81d4fa; --q7-bg:  rgba(129, 212, 250, 0.10); --q7-border:  rgba(129, 212, 250, 0.32);
+    --q8-color:  #a5d6a7; --q8-bg:  rgba(165, 214, 167, 0.10); --q8-border:  rgba(165, 214, 167, 0.32);
+    --q9-color:  #f48fb1; --q9-bg:  rgba(244, 143, 177, 0.10); --q9-border:  rgba(244, 143, 177, 0.32);
+    --q10-color: #ffab91; --q10-bg: rgba(255, 171, 145, 0.10); --q10-border: rgba(255, 171, 145, 0.32);
+    --q11-color: #ffd54f; --q11-bg: rgba(255, 213, 79, 0.10);  --q11-border: rgba(255, 213, 79, 0.32);
+    --q12-color: #ef9a9a; --q12-bg: rgba(239, 154, 154, 0.10); --q12-border: rgba(239, 154, 154, 0.32);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(74, 144, 226, 0.08) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 1;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* Header */
+  .eyebrow {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    color: var(--cyan);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    opacity: 0.85;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 42px);
+    font-weight: 900;
+    line-height: 1.05;
+    text-align: center;
+    margin-bottom: 14px;
+    letter-spacing: -0.02em;
+  }
+
+  h1 .accent {
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 900;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 15px;
+    font-weight: 300;
+    margin-bottom: 40px;
+    padding: 0 8px;
+  }
+
+  /* Quiz filter chips */
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+
+  .chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-dim);
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    user-select: none;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .chip:hover, .chip:focus-visible {
+    color: var(--text);
+    border-color: var(--border-2);
+    background: rgba(255, 255, 255, 0.05);
+    outline: none;
+  }
+
+  .chip.active {
+    color: var(--bg);
+    background: var(--text);
+    border-color: var(--text);
+    font-weight: 600;
+  }
+
+  /* Search */
+  .search-wrap {
+    position: relative;
+    margin: 0 auto 36px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 22px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-faint);
+    pointer-events: none;
+    width: 18px;
+    height: 18px;
+  }
+
+  .search-input {
+    width: 100%;
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 22px 18px 54px;
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px !important;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    /* Prevent iOS auto-zoom on focus */
+    -webkit-text-size-adjust: 100%;
+    transform: translateZ(0);
+  }
+
+  .search-input::placeholder {
+    color: var(--text-faint);
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  .search-input:focus {
+    border-color: var(--accent-2);
+    background: rgba(74, 144, 226, 0.04);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.12);
+  }
+
+  /* Empty state */
+  .empty {
+    text-align: center;
+    padding: 60px 20px 0;
+  }
+  .empty .pill {
+    font-size: 56px;
+    margin-bottom: 24px;
+    display: inline-block;
+    transform: rotate(-15deg);
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.4));
+  }
+  .empty p {
+    color: var(--text-dim);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 460px;
+    margin: 0 auto 6px;
+    padding: 0 8px;
+  }
+  .empty .count {
+    margin-top: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--cyan);
+    letter-spacing: 0.04em;
+  }
+
+  /* Results meta */
+  .results-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding-bottom: 12px;
+  }
+
+  /* Compact row list */
+  .results {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 22px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    border-bottom: 1px solid var(--border);
+  }
+  .row:last-child { border-bottom: none; }
+
+  .row:hover, .row:focus-visible {
+    background: var(--row-hover);
+    outline: none;
+  }
+
+  .row-main { flex: 1; min-width: 0; }
+
+  .generic {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.3;
+    margin-bottom: 3px;
+  }
+
+  .brand {
+    color: var(--text-dim);
+    font-size: 13px;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.3;
+  }
+
+  .quiz-tag {
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    opacity: 0.85;
+  }
+
+  /* Highlight matches */
+  mark {
+    background: rgba(123, 182, 240, 0.22);
+    color: var(--accent);
+    padding: 1px 3px;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+
+  /* Back link */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text-dim);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px 0;
+    margin-bottom: 16px;
+    letter-spacing: 0.04em;
+    transition: color 0.15s ease;
+  }
+  .back-link:hover { color: var(--text); }
+
+  /* Detail card */
+  .drug-card {
+    background: var(--bg-2);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .drug-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      var(--cyan) 18%,
+      var(--accent) 50%,
+      #b39ddb 82%,
+      transparent 100%);
+    z-index: 2;
+  }
+
+  .card-header {
+    padding: 32px 36px 26px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.012), transparent);
+  }
+
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -0.015em;
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+
+  .card-brand {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--cyan);
+    margin-bottom: 18px;
+    letter-spacing: 0.02em;
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .quiz-pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 7px 13px;
+    border-radius: 6px;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+  .quiz-pill[data-q="Q7"]  { color: var(--q7-color);  background: var(--q7-bg);  border-color: var(--q7-border); }
+  .quiz-pill[data-q="Q8"]  { color: var(--q8-color);  background: var(--q8-bg);  border-color: var(--q8-border); }
+  .quiz-pill[data-q="Q9"]  { color: var(--q9-color);  background: var(--q9-bg);  border-color: var(--q9-border); }
+  .quiz-pill[data-q="Q10"] { color: var(--q10-color); background: var(--q10-bg); border-color: var(--q10-border); }
+  .quiz-pill[data-q="Q11"] { color: var(--q11-color); background: var(--q11-bg); border-color: var(--q11-border); }
+  .quiz-pill[data-q="Q12"] { color: var(--q12-color); background: var(--q12-bg); border-color: var(--q12-border); }
+
+  .class-pill {
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+    padding: 7px 13px;
+    border-radius: 6px;
+    border: 1px solid;
+    line-height: 1.3;
+  }
+  .class-pill[data-q="Q7"]  { color: var(--q7-color);  background: rgba(129, 212, 250, 0.04); border-color: var(--q7-border); }
+  .class-pill[data-q="Q8"]  { color: var(--q8-color);  background: rgba(165, 214, 167, 0.04); border-color: var(--q8-border); }
+  .class-pill[data-q="Q9"]  { color: var(--q9-color);  background: rgba(244, 143, 177, 0.04); border-color: var(--q9-border); }
+  .class-pill[data-q="Q10"] { color: var(--q10-color); background: rgba(255, 171, 145, 0.04); border-color: var(--q10-border); }
+  .class-pill[data-q="Q11"] { color: var(--q11-color); background: rgba(255, 213, 79, 0.04);  border-color: var(--q11-border); }
+  .class-pill[data-q="Q12"] { color: var(--q12-color); background: rgba(239, 154, 154, 0.04); border-color: var(--q12-border); }
+
+  .card-body {
+    padding: 28px 36px 32px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    gap: 28px;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 36px;
+  }
+
+  .field-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    opacity: 0.95;
+  }
+
+  .ind-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ind-chip {
+    font-size: 13px;
+    color: var(--accent);
+    padding: 8px 14px;
+    border-radius: 8px;
+    background: rgba(74, 144, 226, 0.07);
+    border: 1px solid rgba(74, 144, 226, 0.28);
+    line-height: 1.3;
+    font-weight: 500;
+  }
+
+  .bullet-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+
+  .bullet-row {
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+
+  .bullet-row .dash {
+    color: var(--text-faint);
+    user-select: none;
+  }
+
+  /* No results */
+  .no-results {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-dim);
+    font-size: 15px;
+  }
+  .no-results .x {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 36px;
+    color: var(--text-faint);
+    margin-bottom: 12px;
+  }
+
+  /* Mobile */
+  @media (max-width: 720px) {
+    .wrap { padding: 48px 14px 72px; }
+    h1 { font-size: 28px; margin-bottom: 14px; }
+    .eyebrow { font-size: 10px; letter-spacing: 0.28em; margin-bottom: 18px; }
+    .subtitle { font-size: 14px; margin-bottom: 28px; }
+
+    .chips { gap: 7px; margin-bottom: 24px; }
+    .chip { padding: 7px 12px; font-size: 11px; }
+
+    .search-input { padding: 15px 16px 15px 46px; font-size: 16px; border-radius: 12px; }
+    .search-icon { left: 16px; width: 16px; height: 16px; }
+
+    .row { padding: 16px 18px; gap: 12px; }
+    .generic { font-size: 15px; }
+    .brand { font-size: 12.5px; }
+    .quiz-tag { font-size: 10.5px; }
+
+    .empty .pill { font-size: 48px; }
+    .empty p { font-size: 14px; }
+
+    /* Detail card mobile */
+    .card-header { padding: 24px 22px 20px; }
+    .card-title { font-size: 30px; }
+    .card-brand { font-size: 13px; margin-bottom: 14px; }
+    .quiz-pill { font-size: 10px; padding: 6px 11px; letter-spacing: 0.06em; }
+    .class-pill { font-size: 11.5px; padding: 6px 11px; }
+
+    .card-body { padding: 22px 22px 26px; gap: 24px; }
+    .field-grid { grid-template-columns: 1fr; gap: 24px; }
+    .field-label { font-size: 10px; letter-spacing: 0.16em; margin-bottom: 12px; }
+    .bullet-row { font-size: 13.5px; line-height: 1.55; }
+    .ind-chip { font-size: 12.5px; padding: 7px 12px; }
+  }
+
+  @media (max-width: 380px) {
+    .wrap { padding: 40px 10px 64px; }
+    h1 { font-size: 26px; }
+    .row { padding: 14px 14px; }
+    .chip { padding: 6px 11px; font-size: 10.5px; }
+    .card-header { padding: 22px 18px 18px; }
+    .card-body { padding: 20px 18px 24px; }
+    .card-title { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="eyebrow">Dispensing &amp; Patient Care II</div>
+  <h1>Top 200 <span class="accent">Drug</span> Reference</h1>
+  <p class="subtitle">Search by generic or brand name</p>
+
+  <div class="chips" id="chips">
+    <button class="chip active" data-quiz="ALL">All Quizzes</button>
+    <button class="chip" data-quiz="Q7">Q7 — Asthma</button>
+    <button class="chip" data-quiz="Q8">Q8 — GI</button>
+    <button class="chip" data-quiz="Q9">Q9 — GU</button>
+    <button class="chip" data-quiz="Q10">Q10 — Pain</button>
+    <button class="chip" data-quiz="Q11">Q11 — Endocrine</button>
+    <button class="chip" data-quiz="Q12">Q12 — Cardio</button>
+  </div>
+
+  <div class="search-wrap">
+    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <path d="m21 21-4.35-4.35"></path>
+    </svg>
+    <input type="text" class="search-input" id="search" placeholder="e.g. Furosemide or Lasix..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  </div>
+
+  <div id="content"></div>
+</div>
+
+<script>
+const DRUGS = [{"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 1, "generic": "Varenicline", "brand": "Chantix", "drugClass": "Smoking Cessation Agent\n(Partial Nicotinic ACh Receptor Agonist)", "indications": "SMOKING CESSATION", "dosing": "0.5mg PO QD × 3 days\n0.5mg PO BID × 4 days\n1mg PO BID × 11 weeks", "adverse": "Dream disorder, nausea, headache, insomnia, irritability", "counseling": "Take with food/full glass of water\nReport suicidality, sleep disturbance, psych changes\nLimit alcohol\nCan use with NRT\nNot effective/approved for ages 12-16", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 2, "generic": "Benzonatate", "brand": "Tessalon", "drugClass": "Antitussive\n(Local Anesthetic)", "indications": "COUGH", "dosing": "100-200mg TID", "adverse": "Mouth/throat numbness if capsule broken or chewed", "counseling": "Do NOT crush or chew capsules\nCan take with food for GI upset\nWatch OD risk with toddlers", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 3, "generic": "Budesonide (inhaled)", "brand": "Pulmicort", "drugClass": "Inhaled Corticosteroid (ICS)", "indications": "ASTHMA", "dosing": "Kids: 500-1000mcg BID (nebulizer)\nAdults: 180-360mcg BID (MDI)", "adverse": "Upper respiratory infections, otitis media", "counseling": "Rinse mouth after use\nUse within 14 days of opening foil\nNot for acute attacks — maintenance only\nSwirl nebulizer solution before use\nEnsure proper inhalation technique", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 4, "generic": "Fluticasone (oral inhaler)", "brand": "Flovent, ArmonAir, Arnuity", "drugClass": "Inhaled Corticosteroid (ICS)", "indications": "ASTHMA", "dosing": "MDI: 88-440mcg BID\nDPI: 50-200mcg QD", "adverse": "Pharyngeal candidiasis", "counseling": "Rinse mouth after use\nRoutinely instruct on proper technique\nSome formulations contain lactose\nWatch for adrenal insufficiency", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 5, "generic": "Budesonide/Formoterol", "brand": "Symbicort", "drugClass": "Inhaled Corticosteroid / LABA Combination", "indications": "ASTHMA\nCOPD", "dosing": "80/4.5mcg or 160/4.5mcg\n2 puffs BID", "adverse": "Upper respiratory tract infections", "counseling": "Shake; wait 1 min between puffs\nRinse mouth/wash face after use\nWash mouthpiece weekly\nNot for acute attacks\nLABA: ↑ risk of asthma-related death — use as combo only", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 6, "generic": "Fluticasone/Salmeterol", "brand": "Advair", "drugClass": "Inhaled Corticosteroid / LABA", "indications": "ASTHMA\nCOPD", "dosing": "MDI: 45-230/21mcg — 2 puffs Q12H\nDiskus: 250/50 or 500/50 — 1 disk Q12H", "adverse": "Headache, pharyngitis, URI, difficulty speaking (dysphonia)", "counseling": "Rinse mouth after use\nNot for acute treatment\nLABA: use as combo only (↑ asthma death risk)\nMonitor for adrenal insufficiency", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 7, "generic": "Tiotropium", "brand": "Spiriva", "drugClass": "Anticholinergic Bronchodilator\n(Long-Acting Muscarinic Antagonist)", "indications": "COPD\nAsthma", "dosing": "HandiHaler: 18mcg 1 cap QD\nRespimat: 1.25-2.5mcg 2 puffs QD", "adverse": "Xerostomia (dry mouth), upper respiratory infections", "counseling": "Not rescue therapy\nFull benefit may take 1-2 months\nWatch anticholinergic effects (can't see, spit, pee)\nInhale capsule twice\nWatch for paradoxical bronchospasm", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 8, "generic": "Montelukast", "brand": "Singulair", "drugClass": "Leukotriene Receptor Antagonist (LTRA)", "indications": "ASTHMA\nExercise-Induced Bronchoconstriction\nSeasonal Allergic Rhinitis", "dosing": "Adults: 10mg QD\nKids: 5mg QD", "adverse": "Dizziness, fatigue, rash, ↑LFTs, dyspepsia, headache", "counseling": "Not for acute treatment\nTake at night\nContinue other asthma meds unless instructed\nNOT recommended first-line", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 9, "generic": "Albuterol", "brand": "ProAir, Proventil, Ventolin", "drugClass": "Short-Acting Beta-2 Agonist (SABA)", "indications": "ACUTE ASTHMA ATTACK\nAcute Bronchospasm\nExercise-Induced Asthma\nAcute COPD Relief", "dosing": "MDI: 2 puffs Q4-6H PRN\nAcute attack: 4-8 puffs Q20min", "adverse": "Tremor, nervousness, nausea, pharyngitis, rhinitis, throat irritation, URI", "counseling": "Prime and shake before use\nWash mouthpiece weekly\nHold breath 10 seconds after inhaling\nFrequent use = poor control — report to provider", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 10, "generic": "Epinephrine", "brand": "EpiPen, Auvi-Q, Adrenaclick", "drugClass": "Adrenergic Agonist\n(Anaphylaxis Agent)", "indications": "ACUTE ALLERGIC ANAPHYLAXIS", "dosing": "Adults: 0.3mg IM/SQ Q5min (max 3 doses)\nKids: 0.1-0.15mg IM/SQ", "adverse": "Anxiety, headache, palpitations, pallor, tremor, sweating, nausea", "counseling": "Seek emergency medical treatment after use\nInject into outer thigh (lateral)\nHold feet during injection", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 11, "generic": "Ipratropium/Albuterol", "brand": "Combivent", "drugClass": "SABA / Anticholinergic Bronchodilator", "indications": "COPD", "dosing": "MDI (20/100mcg): 1 puff Q6H\nNebulizer (0.5/2.5mg): 1 ampule Q6H", "adverse": "Bronchitis, upper respiratory tract infections", "counseling": "Store at room temp in dry environment\nWash mouthpiece weekly\nDeliver entire neb ampule over 5-15 min\nCaution: urinary retention, BPH, narrow-angle glaucoma\nSeek medical attention if no improvement", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 12, "generic": "Azelastine", "brand": "Astelin, Astepro", "drugClass": "Nasal Antihistamine (2nd Gen)", "indications": "ALLERGIC RHINITIS\n(Seasonal & Perennial)\nVasomotor Rhinitis", "dosing": "1-2 sprays/nostril BID\n(0.1%, 0.15%, 137mcg, or 205.5mcg/spray)", "adverse": "Bitter taste, headache, somnolence, rhinitis", "counseling": "CNS depression — alertness precautions\nAvoid alcohol\nPrime pump before use; blow nose first\nAvoid spraying into nasal septum", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 13, "generic": "Hydroxyzine", "brand": "Atarax, Vistaril", "drugClass": "1st Generation Antihistamine", "indications": "ANXIETY\nPruritus (itching)\nSedation", "dosing": "25-100mg 3-6× daily", "adverse": "Sedation, headache, dry mouth, fatigue", "counseling": "Alertness precautions\nCan be used as adjunct for pain/N&V", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 14, "generic": "Fluticasone (nasal)", "brand": "Flonase", "drugClass": "Nasal Corticosteroid", "indications": "ALLERGIC RHINITIS\nNon-Allergic Rhinitis\nNasal Polyps", "dosing": "2 sprays/nostril QD-BID\n(Polyps: 4 sprays/nostril QD)\n50mcg/actuation", "adverse": "Headache, nasal irritation, burning", "counseling": "May take ~1 week for full effect\nAdvise of unique scent\nProper technique/prime before first use\nMonitor for adrenal insufficiency", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 15, "generic": "Mometasone (nasal)", "brand": "Nasonex", "drugClass": "Nasal Corticosteroid", "indications": "ALLERGIC RHINITIS\nNasal Polyps", "dosing": "Kids: 1 spray/nostril QD\nAdults: 2 sprays/nostril QD\n(BID for polyps)", "adverse": "Nasal irritation/burning, headache, pharyngitis, viral infection", "counseling": "Proper technique/prime before first use\nMonitor for adrenal insufficiency\nMay start 2-4 weeks before allergy season", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 16, "generic": "Cetirizine", "brand": "Zyrtec", "drugClass": "2nd Generation Antihistamine", "indications": "SEASONAL/PERENNIAL\nALLERGIC RHINITIS\nChronic Urticaria", "dosing": "Kids: 2.5-5mg QD\nAdults: 5-10mg QD\n(10mg most common)", "adverse": "Drowsiness", "counseling": "Alertness precautions\nMay interfere with allergy skin testing", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q7", "quizFull": "Q7 — Asthma & Allergy", "num": 17, "generic": "Fexofenadine", "brand": "Allegra", "drugClass": "2nd Generation Antihistamine", "indications": "SEASONAL ALLERGIC RHINITIS\nIdiopathic Urticaria", "dosing": "Kids: 30mg BID\nAdults: 60mg BID or 180mg QD", "adverse": "Headache", "counseling": "Alertness precautions\nTake suspension with water only (no juice)\nODT on empty stomach", "quizLabel": "Quiz 7", "quizDetail": "Quiz 7 · Asthma & Allergy"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 1, "generic": "Sucralfate", "brand": "Carafate", "drugClass": "Misc. GI Agent", "indications": "DUODENAL ULCERS", "dosing": "1g QID × 4-8 wk, then BID maintenance", "adverse": "Constipation", "counseling": "Take on empty stomach\nOffset from other meds by 2-4 hours\nShake suspension; store at room temp\nPPIs preferred; reserve for pregnancy", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 2, "generic": "Diphenoxylate/Atropine", "brand": "Lomotil", "drugClass": "Antidiarrheal (C-V)", "indications": "DIARRHEA", "dosing": "2.5/0.025mg — 2 tabs QID until resolved; max 20mg diphenoxylate/day", "adverse": "GI discomfort, nausea, vomiting", "counseling": "Alertness precautions\nAvoid alcohol/CNS depressants\nSeek care for alarm symptoms\nDon't exceed max dose\nSolution preferred for kids <13\nAtropine toxicity: blind as a bat...", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 3, "generic": "Polyethylene Glycol", "brand": "Golytely", "drugClass": "Osmotic Laxative", "indications": "COLONOSCOPY/BARIUM ENEMA PREP\nConstipation", "dosing": "Colonoscopy prep: 2-4L\nConstipation: 17g in 8oz fluid QD", "adverse": "Anal irritation, bloating, epigastric fullness, nausea, stomach cramps, vomiting", "counseling": "Mix well\nStop eating 4 hours prior (bowel prep)\nDrink in sprints, not sips\nCan chill; do not add ice", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 4, "generic": "Metoclopramide", "brand": "Reglan", "drugClass": "Dopamine Antagonist (Prokinetic)", "indications": "DIABETIC GASTROPARESIS\nGERD", "dosing": "5-10mg TID before meals + QHS × 2-12 wk\n10-15mg for GERD up to 6 months", "adverse": "Asthenia, somnolence", "counseling": "Take on empty stomach before meals\nNot for long-term use\nUse care with ODT; chase with water\nWatch for extrapyramidal symptoms/dyskinesias", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 5, "generic": "Dicyclomine", "brand": "Bentyl", "drugClass": "Antimuscarinic", "indications": "IBS", "dosing": "20-40mg QID (adults)", "adverse": "Decreased sweating, xerostomia, GI distress, blurred vision, dizziness, constipation, drowsiness", "counseling": "Alertness precautions\nReduced heat tolerance\nDon't use chronically\nExtreme caution with infants", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 6, "generic": "Famotidine", "brand": "Pepcid", "drugClass": "H2 Receptor Antagonist (H2RA)", "indications": "GERD\nIndigestion", "dosing": "20-40mg BID up to 12 weeks", "adverse": "Constipation, diarrhea, nausea, skin rash", "counseling": "Take at bedtime\nCan take with food/antacids\nWatch duplication with OTC products\nConvert IV to oral ASAP\nShake suspension well", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 7, "generic": "Promethazine", "brand": "Phenergan", "drugClass": "1st Gen H1 Antihistamine (Antiemetic)", "indications": "NAUSEA & VOMITING", "dosing": "25mg Q4-6H PRN", "adverse": "Somnolence, xerostomia", "counseling": "Alertness precautions\nAvoid alcohol\nAvoid in geriatrics (anticholinergic)\nCan take with food/milk\nInjectable can damage tissue", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 8, "generic": "Dexlansoprazole", "brand": "Dexilant", "drugClass": "Proton Pump Inhibitor (PPI)", "indications": "EROSIVE ESOPHAGITIS\nGERD", "dosing": "30-60mg QD × 4-8 wk (depending on indication)", "adverse": "Diarrhea, abdominal pain, nausea, flatulence, vomiting", "counseling": "Avoid antacids\nCan take without regard to meals\nNo interaction with clopidogrel\nWatch osteoporosis (long-term)\nWatch OTC duplication", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 9, "generic": "Esomeprazole", "brand": "Nexium", "drugClass": "Proton Pump Inhibitor (PPI)", "indications": "H. PYLORI\nErosive Esophagitis\nGERD\nNSAID Prophylaxis\nZollinger-Ellison Syndrome", "dosing": "20-40mg QD × 2-8 wk (depending on indication)", "adverse": "Headache", "counseling": "Take 1 hour before meals\nWatch osteoporosis (long-term)\nWatch OTC duplication\nComplete full H. pylori regimen\nTitrate down\nUse calcium citrate if supplementing", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 10, "generic": "Lansoprazole", "brand": "Prevacid", "drugClass": "Proton Pump Inhibitor (PPI)", "indications": "DUODENAL/PEPTIC ULCERS\nH. Pylori\nErosive Esophagitis/GERD\nZollinger-Ellison Syndrome", "dosing": "15-30mg QD × 4-16 wk (depending on indication)", "adverse": "Diarrhea, headache", "counseling": "Take 1 hour prior to meals\nAvoid concurrent antacids\nTake on schedule, not PRN\nCan sprinkle in applesauce\nWatch OTC duplication\nComplete full H. pylori regimen\nWatch osteoporosis", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 11, "generic": "Omeprazole", "brand": "Prilosec", "drugClass": "Proton Pump Inhibitor (PPI)", "indications": "GERD\nPUD\nH. Pylori\nZollinger-Ellison Syndrome", "dosing": "20-40mg QD", "adverse": "Abdominal pain, diarrhea, headache", "counseling": "Take 1 hour prior to meals\nWatch OTC duplication\nComplete full H. pylori regimen\nWatch osteoporosis", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 12, "generic": "Pantoprazole", "brand": "Protonix", "drugClass": "Proton Pump Inhibitor (PPI)", "indications": "GERD\nZollinger-Ellison Syndrome", "dosing": "20-40mg QD", "adverse": "Abdominal pain, diarrhea, flatulence, headache", "counseling": "SJS risk\nBest to take before food\nConvert IV to oral ASAP\nWatch OTC duplication\nComplete full H. pylori regimen\nCan sprinkle on applesauce", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 13, "generic": "Ondansetron", "brand": "Zofran", "drugClass": "Antiemetic (Serotonin 5-HT3 Antagonist)", "indications": "CHEMO-INDUCED N&V\nRadiation N&V\nPost-Op N&V Prophylaxis", "dosing": "8mg TID; Chemo: 16-24mg 30 min before start", "adverse": "Constipation, diarrhea, headache", "counseling": "Use care with ODT\nOften dosed with other antiemetics for chemo\nWidespread off-label use for general N&V", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 14, "generic": "Gatifloxacin (ophthalmic)", "brand": "Zymaxid", "drugClass": "Fluoroquinolone (Ophthalmic)", "indications": "BACTERIAL CONJUNCTIVITIS", "dosing": "0.5% sol: 1 gtt Q2H (awake) day 1, then 1 gtt QID × 6 days", "adverse": "Conjunctivitis, dry eyes, eye pain, subconjunctival hemorrhage, tearing/burning, ↓visual acuity", "counseling": "Complete full course\nShould improve in 2-3 days; contact MD if worsens\nWash hands before/after\nMaintain dropper sterility\nAvoid contacts", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 15, "generic": "Moxifloxacin (ophthalmic)", "brand": "Vigamox", "drugClass": "Fluoroquinolone (Ophthalmic)", "indications": "BACTERIAL CONJUNCTIVITIS", "dosing": "0.5% sol: 1 gtt BID–TID (depending on brand)", "adverse": "Conjunctivitis, dry eyes, eye pain, subconjunctival hemorrhage, tearing/burning, ↓visual acuity", "counseling": "Complete full course\nShould improve in 2-3 days; contact MD if worsens\nWash hands before/after\nMaintain dropper sterility\nAvoid contacts", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 16, "generic": "Loteprednol (ophthalmic)", "brand": "Alrex / Lotemax", "drugClass": "Corticosteroid (Ophthalmic)", "indications": "SEASONAL ALLERGIC CONJUNCTIVITIS\nDry Eye Disease\nInflammatory Conditions\nPost-Op Inflammation", "dosing": "1-2 gtts QID (higher strength for inflammatory conditions)", "adverse": "Headache, burning, discharge, dry eyes, itching, photophobia, blurred vision", "counseling": "Typical eye drop application\nOffset from contacts by 10 minutes", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 17, "generic": "Cyclosporine (ophthalmic)", "brand": "Restasis", "drugClass": "Calcineurin Inhibitor (Ophthalmic)", "indications": "KERATOCONJUNCTIVITIS\nVernal Keratoconjunctivitis", "dosing": "1 gtt in each affected eye 2-4× daily", "adverse": "Burning sensation, eye pain", "counseling": "Use single-use package immediately upon opening\nMix before using\nSeparate from contacts/other eye drops\n16+ only", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 18, "generic": "Latanoprost", "brand": "Xalatan", "drugClass": "Prostaglandin Analog", "indications": "OCULAR HTN\nOpen-Angle Glaucoma", "dosing": "1 drop in each affected eye QPM", "adverse": "Blurred vision, itching, foreign body sensation, eyelid hyperpigmentation, iris pigmentation", "counseling": "Typical eye drop application\nSeparate from contacts/other eye drops\nSeparate from pilocarpine by 1 hour\nStore unopened bottles in fridge\nOpen bottles stable 6 weeks", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 19, "generic": "Timolol (ophthalmic)", "brand": "Timoptic / Betimol", "drugClass": "Beta Blocker (Ophthalmic)", "indications": "GLAUCOMA", "dosing": "1 drop in each eye BID", "adverse": "Blurry vision, stinging", "counseling": "Systemic absorption/adverse effects can occur\nSeparate from contacts/other eye drops\nTypical eye drop counseling", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q8", "quizFull": "Q8 — GI & Ophthalmics", "num": 20, "generic": "Ciprofloxacin (otic)", "brand": "Cetraxal", "drugClass": "Fluoroquinolone Antibiotic (Otic)", "indications": "OTITIS EXTERNA\nOtitis Media", "dosing": "Externa: 0.25ml in affected ear BID × 7 days\nMedia: 6mg intratympanically (with tube placement)", "adverse": "Application site itching/pain", "counseling": "Warm in hands before application\nRemain prone 1 minute after using", "quizLabel": "Quiz 8", "quizDetail": "Quiz 8 · GI & Ophthalmics"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 1, "generic": "Finasteride", "brand": "Proscar / Propecia", "drugClass": "5α-Reductase Inhibitor", "indications": "BPH\nMale Pattern Baldness", "dosing": "BPH: 5mg QD\nBaldness: 1mg QD", "adverse": "Impotence, reduced libido", "counseling": "3-6 months for full effect\nHighly teratogenic\nOften used with tamsulosin\nWatch suicidality", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 2, "generic": "Tamsulosin", "brand": "Flomax", "drugClass": "Selective α1a Blocker", "indications": "BPH Symptom Relief\nNeurogenic Bladder\nUreter Stones", "dosing": "0.4-0.8mg QD", "adverse": "Dizziness, headache, abnormal ejaculation, rhinitis", "counseling": "Take 30 min after same meal each day\nAlertness precautions\nRise slowly\n1st dose effect\nDrug of 1st choice for BPH symptom relief", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 3, "generic": "Oxybutynin", "brand": "Ditropan", "drugClass": "Non-Selective Antimuscarinic", "indications": "Overactive Bladder\nNeurogenic Bladder", "dosing": "IR: 5mg 2-4× daily\nER: 5-30mg QD", "adverse": "Constipation, xerostomia, blurred vision", "counseling": "Watch anticholinergic effects\nWatch decreased heat regulation\nAlertness precautions\nWatch cognitive decline\nUse lifestyle changes", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 4, "generic": "Tolterodine", "brand": "Detrol", "drugClass": "Non-Selective Antimuscarinic", "indications": "Overactive Bladder", "dosing": "IR: 1-2mg BID\nER: 2-4mg QD", "adverse": "Xerostomia", "counseling": "Watch anticholinergic effects\nWatch decreased heat regulation\nAlertness precautions\nWatch cognitive decline\nUse lifestyle changes", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 5, "generic": "Mirabegron", "brand": "Myrbetriq", "drugClass": "β3 Adrenergic Agonist", "indications": "Overactive Bladder", "dosing": "25-50mg QD", "adverse": "HTN", "counseling": "Watch HTN and tachycardia\nUse lifestyle modifications", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 6, "generic": "Sildenafil", "brand": "Viagra", "drugClass": "PDE5 Inhibitor", "indications": "Erectile Dysfunction\nPulmonary HTN", "dosing": "ED: 25-100mg PRN\nPulmonary HTN: 20mg TID", "adverse": "Flushing, nausea, headache, visual disturbances, blue/green color discrimination loss", "counseling": "Take 30-240 min before sex\nDo not dose more than once daily for ED\nLifestyle modifications recommended\nAssess if ED is medication-related", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 7, "generic": "Tadalafil", "brand": "Cialis", "drugClass": "PDE5 Inhibitor", "indications": "Erectile Dysfunction\nBPH\nPulmonary HTN", "dosing": "2.5-40mg QD (depending on indication)", "adverse": "Flushing, nausea, myalgia, headache", "counseling": "Alertness precautions\nOnce daily dosing\nSeek care for severe adverse reactions\nLifestyle modifications\nAssess medication causes", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 8, "generic": "Phenazopyridine", "brand": "Pyridium", "drugClass": "Urinary Analgesic", "indications": "Dysuria", "dosing": "100-200mg TID after meals × 2 days", "adverse": "GI upset", "counseling": "Turns urine red/orange\nTake with food\nOTC products available\nLimit to 2 days for UTI", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 9, "generic": "Alendronate", "brand": "Fosamax", "drugClass": "Bisphosphonate", "indications": "Osteoporosis\nPaget Disease", "dosing": "Daily: 5-40mg; Weekly: 35-70mg (depending on indication)", "adverse": "Fever, gastric ulcer, decreased serum calcium", "counseling": "Take 30-60 min before breakfast with full glass of water; remain upright ≥30 min\nONJ risk\nAtypical fracture risk\nEnsure adequate vitamin D and calcium", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 10, "generic": "Raloxifene", "brand": "Evista", "drugClass": "Selective Estrogen Receptor Modulator (SERM)", "indications": "Osteoporosis\nBreast Cancer Prophylaxis", "dosing": "60mg QD", "adverse": "Hot flashes, arthralgia, flu-like symptoms", "counseling": "VTE risk\nEnsure adequate vitamin D and calcium\nBetter than tamoxifen for cancer prophylaxis", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 11, "generic": "Conjugated Estrogens", "brand": "Premarin", "drugClass": "Hormone Replacement Therapy (HRT)", "indications": "MENOPAUSE SYMPTOMS\n(Vasomotor, vaginal atrophy)\nPrimary Ovarian Failure", "dosing": "0.3mg PO QD (higher for primary ovarian failure)", "adverse": "Weight change, headache, migraine, depression, menstrual disorder, breast pain", "counseling": "Discuss long-term risk/benefit\nTake at night\nUse with progestin if uterus intact\nUse lowest effective dose", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 12, "generic": "Estradiol (oral)", "brand": "Estrace", "drugClass": "Hormone Replacement Therapy (HRT)", "indications": "MENOPAUSE SYMPTOMS\nPrimary Ovarian Failure\nOsteoporosis\nCancer Palliation", "dosing": "0.5-2mg QD (cycle 3 wks on, 1 wk off)", "adverse": "Weight change, nausea, vomiting, mood disturbance, breast swelling, depression", "counseling": "Report bleeding\nDo not smoke — VTE risk\nUse lowest effective dose\nUse with progestin if uterus intact", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 13, "generic": "Estradiol (transdermal patch)", "brand": "Vivelle / Climara", "drugClass": "Hormone Replacement Therapy (HRT)", "indications": "MENOPAUSE SYMPTOMS\nOsteoporosis", "dosing": "0.025-0.0375mg/day patch; applied once or twice weekly", "adverse": "Edema, application site irritation", "counseling": "Report bleeding\nDo not smoke — VTE risk\nUse lowest effective dose\nUse with progestin if uterus intact\nDo not apply to breast or hips; rotate sites", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 14, "generic": "Progesterone", "brand": "Prometrium", "drugClass": "Hormone Replacement Therapy (HRT)", "indications": "Cancer Prevention during Estrogen HRT\nFertility Assistance\nSecondary Amenorrhea", "dosing": "200-400mg daily", "adverse": "Weight change, headache, amenorrhea, breast tenderness, abdominal pain", "counseling": "Separate from other vaginal dosage forms\nPeriod should occur 7 days after stopping for amenorrhea\nMyriad risks", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 15, "generic": "Medroxyprogesterone", "brand": "Provera", "drugClass": "Hormone Replacement Therapy (HRT)", "indications": "Cancer Prevention during Estrogen HRT\nSecondary Amenorrhea\nAbnormal Uterine Bleeding", "dosing": "5-10mg PO daily", "adverse": "Weight gain, headache, amenorrhea, breast tenderness, nervousness", "counseling": "Period should occur 7 days after stopping for amenorrhea\nMyriad risks\nDepo form used Q3 months for contraception", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q9", "quizFull": "Q9 — GU & Hormones", "num": 16, "generic": "Testosterone", "brand": "AndroGel / Androderm", "drugClass": "Hormone Replacement Therapy (HRT)", "indications": "Male Hypogonadism", "dosing": "Dosage form dependent: ~5-50mg QD", "adverse": "BPH, testicular atrophy, PSA increase", "counseling": "Watch cross-contamination to women and children", "quizLabel": "Quiz 9", "quizDetail": "Quiz 9 · GU & Hormones"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 1, "generic": "Celecoxib", "brand": "Celebrex", "drugClass": "COX-2 Inhibitor (NSAIDs)", "indications": "Osteoarthritis\nRheumatoid Arthritis\nAnkylosing Spondylitis\nDysmenorrhea", "dosing": "100-200mg once or twice daily", "adverse": "HTN, headaches, GI distress, diarrhea", "counseling": "Lower GI risk / Higher CV risk than other NSAIDs\nGI risk increased in geriatrics\nUse lowest dose for shortest duration", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 2, "generic": "Diclofenac", "brand": "Voltaren", "drugClass": "NSAID", "indications": "Pain\nDysmenorrhea\nMigraine\nOsteoarthritis\nRheumatoid Arthritis\nAnkylosing Spondylitis", "dosing": "25-200mg in 1-4 divided doses", "adverse": "Headache, GI distress", "counseling": "Take with food/milk for GI upset\nRisk of GI/CV complications, esp. elderly\nUse lowest dose for shortest duration\nMany salts and dosage forms", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 3, "generic": "Ibuprofen", "brand": "Motrin / Advil", "drugClass": "NSAID", "indications": "Fever\nPain\nOsteoarthritis\nJuvenile Rheumatoid Arthritis", "dosing": "200-800mg TID to QID", "adverse": "Edema, itching, rash, GI distress, dizziness, tinnitus, ototoxicity (less common)", "counseling": "Take with food/milk for GI upset\nRisk of GI/CV complications, esp. elderly\nUse lowest dose for shortest duration\nWatch OTC duplication", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 4, "generic": "Meloxicam", "brand": "Mobic", "drugClass": "NSAID", "indications": "Osteoarthritis\nRheumatoid Arthritis\nJuvenile RA", "dosing": "5-15mg once daily", "adverse": "GI distress", "counseling": "Take with food/milk for GI upset\nRisk of GI/CV complications, esp. elderly\nUse lowest dose for shortest duration\nCaution in pregnancy", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 5, "generic": "Naproxen", "brand": "Naprosyn / Aleve", "drugClass": "NSAID", "indications": "Osteoarthritis\nRheumatoid Arthritis\nGout\nFever\nPain", "dosing": "250-550mg BID (IR)\n750-1000mg QD (ER)", "adverse": "Edema, itching, rash, GI distress, dizziness, tinnitus, ototoxicity (less common)", "counseling": "Take with food/milk for GI upset\nRisk of GI/CV complications, esp. elderly\nUse lowest dose for shortest duration", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 6, "generic": "Baclofen", "brand": "Lioresal", "drugClass": "Central-Acting Skeletal Muscle Relaxant", "indications": "Spasticity", "dosing": "5mg TID; titrate up to MDD 80mg/day", "adverse": "Nausea, asthenia, dizziness, somnolence, confusion", "counseling": "Injectable/intrathecal forms available\nAvoid opioids\nIntrathecal: constipation and withdrawal = death", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 7, "generic": "Carisoprodol", "brand": "Soma", "drugClass": "Central Skeletal Muscle Relaxant", "indications": "Skeletal Muscle Disorders", "dosing": "250-350mg PO TID and HS", "adverse": "Drowsiness, dizziness", "counseling": "Alertness precautions\nAvoid alcohol/CNS depressants\nMonitor withdrawal symptoms\nShort-term use only\nTaper after chronic use", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 8, "generic": "Cyclobenzaprine", "brand": "Flexeril / Amrix", "drugClass": "Central Skeletal Muscle Relaxant", "indications": "Skeletal Muscle Spasm", "dosing": "5-10mg TID\n15-30mg QD (ER)", "adverse": "Xerostomia, headache, dizziness, drowsiness", "counseling": "Alertness precautions\nAvoid alcohol/CNS depressants\nShort-term use only\nAnticholinergic adverse effects\nCaution in elderly and those with glaucoma or urinary retention", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 9, "generic": "Methocarbamol", "brand": "Robaxin", "drugClass": "Central Skeletal Muscle Relaxant", "indications": "Skeletal Muscle Pain/Spasm", "dosing": "4-4.5g/day in 3-4 divided doses", "adverse": "Somnolence", "counseling": "Alertness precautions\nAvoid opioids\nShort-term use only\nMay change urine color", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 10, "generic": "Tizanidine", "brand": "Zanaflex", "drugClass": "Alpha-2 Agonist / Central Skeletal Muscle Relaxant", "indications": "Skeletal Muscle Spasticity", "dosing": "2-8mg TID-QID\nMDD: 36mg/day", "adverse": "Hypotension, xerostomia, asthenia, dizziness, somnolence, muscle weakness", "counseling": "Alertness precautions\nTake consistently with or without food\nTaper down: rebound HTN/tachycardia\nAvoid alcohol/CNS depressants\nCapsule and tablet NOT interchangeable", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 11, "generic": "Methadone", "brand": "Dolophine", "drugClass": "Opioid Analgesic", "indications": "Pain\nOpioid Drug Detox/Dependence", "dosing": "2.5mg PO 2-3x daily (pain)\nHigher doses, titrate down (opioid abuse)", "adverse": "Constipation, GI distress, hypotension, dizziness, sedation", "counseling": "Use stimulant laxative\nAlertness precautions\nAvoid alcohol/CNS depressants\nTaper down\nDosing is challenging", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 12, "generic": "Fentanyl", "brand": "Duragesic", "drugClass": "Opioid Analgesic", "indications": "Chronic Pain\nCancer Pain", "dosing": "12.5-100mcg/hr (patch)", "adverse": "Application site reactions, sweating, constipation, GI distress, confusion, headache, anxiety, urinary retention, fatigue", "counseling": "Use stimulant laxative\nAlertness precautions\nAvoid alcohol/CNS depressants\nTaper down\nCaution in geriatrics\nHigh overdose potential with patch", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 13, "generic": "Morphine", "brand": "MS Contin / MSIR", "drugClass": "Opioid Analgesic", "indications": "Chronic Pain\nSevere Acute Pain", "dosing": "10-30mg Q4H (IR)\n10-20mg Q12H (ER)", "adverse": "Constipation, nausea, vomiting, hypotension, dizziness, sedation, diaphoresis, headache, depression, xerostomia", "counseling": "Use stimulant laxative\nAlertness precautions\nAvoid alcohol/CNS depressants\nTaper down", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 14, "generic": "Oxycodone", "brand": "OxyContin / Roxicodone", "drugClass": "Opioid Analgesic", "indications": "Chronic Pain", "dosing": "5-15mg Q4-6H", "adverse": "Constipation, GI distress, sedation, sweating, pruritus", "counseling": "Use stimulant laxative\nAlertness precautions\nAvoid alcohol/CNS depressants\nTaper down", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 15, "generic": "Tramadol", "brand": "Ultram", "drugClass": "Opioid Analgesic", "indications": "Chronic Pain", "dosing": "50mg Q4-6H\nMDD: 400mg/day", "adverse": "Constipation, GI distress, dizziness, sedation, edema, sweating, pruritus, headache, flushing", "counseling": "Use stimulant laxative\nAlertness precautions\nAvoid alcohol/CNS depressants\nTaper down\nSuicidality risk\nDecreased respiratory depression risk vs. other opioids", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 16, "generic": "Codeine/Acetaminophen", "brand": "Tylenol w/ Codeine #3", "drugClass": "Opioid Analgesic", "indications": "Pain", "dosing": "15-60mg codeine Q4-6H PRN", "adverse": "Nausea, vomiting, constipation, somnolence", "counseling": "Use stimulant laxative\nAlertness precautions\nAvoid alcohol/CNS depressants\nTaper down", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 17, "generic": "Hydrocodone/Acetaminophen", "brand": "Norco / Vicodin", "drugClass": "Opioid Analgesic", "indications": "Pain", "dosing": "10mg Q12H; titrate up", "adverse": "Constipation, nausea, sedation", "counseling": "Use stimulant laxative\nAlertness precautions\nAvoid alcohol/CNS depressants\nTaper down", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 18, "generic": "Buprenorphine/Naloxone", "brand": "Suboxone", "drugClass": "Opioid Partial Agonist / Antagonist Combo", "indications": "Opioid Use Disorder / Withdrawal", "dosing": "4-24mg buprenorphine once daily", "adverse": "Vasodilation, sweating, headache, insomnia, constipation, GI distress, opioid withdrawal, dizziness", "counseling": "Use stimulant laxative\nAlertness precautions\nAvoid alcohol/CNS depressants\nTaper down\nDoses not interchangeable\nUsed for opioid withdrawal/dependence", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 19, "generic": "Lidocaine Topical", "brand": "Lidoderm", "drugClass": "Local Anesthetic", "indications": "Postherpetic Neuralgia\nLocalized Pain", "dosing": "1-3 patches; 12h on, 12h off", "adverse": "Skin irritation, somnolence", "counseling": "12-hour/day limit\nTypical patch counseling\nCan cut patch\nDo not ingest", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 20, "generic": "Rizatriptan", "brand": "Maxalt", "drugClass": "Antimigraine / 5-HT1 Agonist (Triptan)", "indications": "Migraine", "dosing": "5-10mg at onset; repeat Q2H\nMDD: 30mg/day", "adverse": "Nausea, asthenia, dizziness, somnolence (less common)", "counseling": "Alertness precautions\nAvoid alcohol/CNS depressants\nAcute treatment only – not prophylaxis", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q10", "quizFull": "Q10 — Pain Mgmt", "num": 21, "generic": "Sumatriptan", "brand": "Imitrex", "drugClass": "Antimigraine / 5-HT1 Agonist (Triptan)", "indications": "Migraine\nCluster Headaches", "dosing": "25-100mg at onset; repeat Q2H\nMDD: 200mg", "adverse": "Nausea, asthenia, dizziness, somnolence (less common)", "counseling": "Alertness precautions\nAvoid alcohol/CNS depressants\nAcute treatment only – not prophylaxis", "quizLabel": "Quiz 10", "quizDetail": "Quiz 10 · Pain Management"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 1, "generic": "Metformin", "brand": "Glucophage", "drugClass": "Biguanide", "indications": "Type 2 Diabetes Mellitus", "dosing": "500-2000mg/day in 1-2 divided doses", "adverse": "Diarrhea, nausea, vomiting, flatulence, malabsorption, asthenia", "counseling": "Take with food/water\nAvoid alcohol\nHold 48h before iodinated contrast; check renal function", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 2, "generic": "Linagliptin", "brand": "Tradjenta", "drugClass": "DPP-4 Inhibitor", "indications": "Type 2 Diabetes Mellitus", "dosing": "5mg PO QD", "adverse": "Hypoglycemia (with sulfonylureas or insulin)", "counseling": "Watch for hypoglycemia\nTake with or without food\nTake at SAME TIME each day\n2nd-line agent", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 3, "generic": "Sitagliptin", "brand": "Januvia", "drugClass": "DPP-4 Inhibitor", "indications": "Type 2 Diabetes Mellitus", "dosing": "100mg PO QD", "adverse": "Hypoglycemia", "counseling": "Watch for hypoglycemia\nTake with breakfast\n18+ only\n2nd-line agent\nWatch for pancreatitis", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 4, "generic": "Dulaglutide", "brand": "Trulicity", "drugClass": "GLP-1 Receptor Agonist", "indications": "Type 2 Diabetes Mellitus", "dosing": "0.75-1.5mg SubQ once weekly", "adverse": "Nausea, diarrhea, weight loss", "counseling": "Inject on same day each week\nStable at room temp for 14 days\nDo not inject adjacent to insulin site\nWatch for thyroid/kidney problems", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 5, "generic": "Liraglutide", "brand": "Victoza / Saxenda", "drugClass": "GLP-1 Receptor Agonist", "indications": "Type 2 Diabetes Mellitus\nWeight Loss (Saxenda)", "dosing": "0.6-3mg SubQ once daily", "adverse": "Nausea, diarrhea, vomiting, hypoglycemia", "counseling": "Watch for hypoglycemia\nDo not inject adjacent to insulin site", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 6, "generic": "Canagliflozin", "brand": "Invokana", "drugClass": "SGLT-2 Inhibitor", "indications": "Type 2 Diabetes Mellitus", "dosing": "100-300mg PO QD before first meal", "adverse": "Hyperkalemia, GU fungal infection, renal insufficiency", "counseling": "Take before first meal\nWatch GU symptoms\nWatch for dehydration\nIncreased risk of lower limb amputation (canagliflozin-specific)", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 7, "generic": "Dapagliflozin", "brand": "Farxiga", "drugClass": "SGLT-2 Inhibitor", "indications": "Type 2 Diabetes Mellitus\nHFrEF\nCKD", "dosing": "5-10mg PO QD", "adverse": "Hypoglycemia, hypovolemia, electrolyte abnormalities, nasopharyngitis, UTIs (less common)", "counseling": "Take before first meal\nWatch GU symptoms\nWatch for dehydration", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 8, "generic": "Glimepiride", "brand": "Amaryl", "drugClass": "Sulfonylurea", "indications": "Type 2 Diabetes Mellitus", "dosing": "1-8mg PO QD", "adverse": "Hypoglycemia, nausea, headache, dizziness, asthenia (less common)", "counseling": "Monitor blood glucose\nTake with food/milk in morning\nPhotosensitivity\nAvoid alcohol\nCaution in G6PD deficiency (hemolytic anemia risk)", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 9, "generic": "Glipizide", "brand": "Glucotrol", "drugClass": "Sulfonylurea", "indications": "Type 2 Diabetes Mellitus", "dosing": "IR: 5-40mg/day in 1-2 divided doses\nER: 5-20mg PO QD", "adverse": "Asthenia", "counseling": "Monitor blood glucose\nTake with food/milk in morning\nPhotosensitivity\nAvoid alcohol\nCaution in G6PD deficiency (hemolytic anemia risk)", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 10, "generic": "Pioglitazone", "brand": "Actos", "drugClass": "Thiazolidinedione (TZD)", "indications": "Type 2 Diabetes Mellitus", "dosing": "15-45mg PO QD", "adverse": "Edema, weight gain", "counseling": "Several weeks for full effect\nReport eye pain or jaundice\nMay stimulate ovulation\nWatch for edema/CHF\n18+ only", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 11, "generic": "Dexamethasone", "brand": "Decadron", "drugClass": "Glucocorticoid", "indications": "Inflammatory/Autoimmune Conditions\nAllergic Reactions\nEdema\nOncology (adjunct)", "dosing": "0.75-9mg PO/day; titrate to effect", "adverse": "HTN, GI upset", "counseling": "Take with food\nWatch for hyperglycemia, GI ulcer, osteoporosis, adrenal insufficiency, and infection\nCan cause mood changes\nTaper down\nUse lowest effective dose for shortest duration", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 12, "generic": "Methylprednisolone", "brand": "Medrol", "drugClass": "Glucocorticoid", "indications": "Inflammatory/Autoimmune Conditions\nAllergic Reactions\nEdema", "dosing": "4-48mg PO daily", "adverse": "GI upset, hyperglycemia", "counseling": "Take with food\nWatch for hyperglycemia, GI ulcer, osteoporosis, adrenal insufficiency, and infection\nCan cause mood changes\nTaper down\nUse lowest effective dose for shortest duration", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 13, "generic": "Prednisolone", "brand": "Orapred", "drugClass": "Glucocorticoid", "indications": "Inflammatory/Autoimmune Conditions\nAllergic Reactions\nEdema", "dosing": "5-60mg PO daily", "adverse": "GI upset", "counseling": "Take with food\nWatch for hyperglycemia, GI ulcer, osteoporosis, adrenal insufficiency, and infection\nCan cause mood changes\nTaper down\nUse lowest effective dose for shortest duration", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 14, "generic": "Prednisone", "brand": "Deltasone", "drugClass": "Glucocorticoid", "indications": "Inflammatory/Autoimmune Conditions\nAllergic Reactions\nEdema", "dosing": "5-60mg PO daily", "adverse": "GI upset", "counseling": "Take with food\nWatch for hyperglycemia, GI ulcer, osteoporosis, adrenal insufficiency, and infection\nCan cause mood changes\nTaper down\nUse lowest effective dose for shortest duration\nProdrug — activated to prednisolone in liver", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q11", "quizFull": "Q11 — Endocrine", "num": 15, "generic": "Levothyroxine", "brand": "Synthroid", "drugClass": "Thyroid Hormone Replacement", "indications": "Hypothyroidism", "dosing": "25-300mcg PO daily", "adverse": "Decreased appetite, anxiety, diarrhea, insomnia (less common — signs of excess)", "counseling": "6-8 weeks for full effect\nTake on empty stomach every morning\nNot for weight loss", "quizLabel": "Quiz 11", "quizDetail": "Quiz 11 · Endocrine"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 1, "generic": "Furosemide", "brand": "Lasix", "drugClass": "Loop Diuretic", "indications": "Edema (CHF / CKD)", "dosing": "20-80mg PO once daily; titrate to effect", "adverse": "Hyperuricemia", "counseling": "Avoid alcohol\nAvoid NSAIDs\nPhotosensitivity\nAlertness precautions\nWatch K+ levels\nWatch for ototoxicity", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 2, "generic": "Torsemide", "brand": "Demadex", "drugClass": "Loop Diuretic", "indications": "Edema", "dosing": "10-20mg PO daily; titrate to effect", "adverse": "Polyuria, ECG abnormality, GI distress, myalgia (less common)", "counseling": "Avoid alcohol\nAvoid NSAIDs\nPhotosensitivity\nAlertness precautions\nWatch K+ levels\nMonitor weight daily\n2nd-line to furosemide", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 3, "generic": "Spironolactone", "brand": "Aldactone", "drugClass": "Mineralocorticoid Receptor Antagonist (MRA)", "indications": "CHF\nAscites\nHTN\nPrimary Aldosteronism", "dosing": "12.5-100mg PO QD", "adverse": "Hyperkalemia, hyponatremia, gynecomastia, breast tenderness, menstrual irregularities, GI distress (less common)", "counseling": "Alertness precautions\nWatch electrolytes\nAvoid alcohol\nAvoid NSAIDs\nLower dose if using other diuretics\nUse loading dose", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 4, "generic": "Triamterene/Hydrochlorothiazide", "brand": "Dyazide / Maxzide", "drugClass": "K+-Sparing / Thiazide Diuretic Combo", "indications": "Edema\nHTN", "dosing": "37.5/25mg to 75/50mg PO QD", "adverse": "Hypotension, dizziness, headache", "counseling": "Watch electrolytes\nWatch renal function\nWatch for jaundice\nWatch for gout\nRise slowly\nAvoid alcohol\nAvoid NSAIDs\nPhotosensitivity", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 5, "generic": "Hydrochlorothiazide", "brand": "Microzide", "drugClass": "Thiazide Diuretic", "indications": "Edema\nHTN", "dosing": "12.5-50mg PO QD", "adverse": "Hypotension, dizziness, headache", "counseling": "Take in morning\nAvoid alcohol\nAvoid NSAIDs\nWatch dizziness/hypotension\nWatch electrolyte balance\nSeveral weeks for full effect", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 6, "generic": "Chlorthalidone", "brand": "Thalitone", "drugClass": "Thiazide Diuretic", "indications": "Edema\nHTN", "dosing": "12.5-100mg PO QD", "adverse": "Dizziness, hypotension, hyperuricemia", "counseling": "Take QAM with food\nAvoid alcohol\nAvoid NSAIDs\nAlertness precautions\nWatch for gout\nWatch dizziness/hypotension", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 7, "generic": "Amiodarone", "brand": "Pacerone", "drugClass": "Class III Antiarrhythmic", "indications": "Ventricular Arrhythmias", "dosing": "200-400mg PO QD", "adverse": "Nausea, vomiting, phospholipidemia", "counseling": "Photosensitivity (blue-gray skin discoloration)\nWatch cardiac and liver toxicity\nMany DDIs\nAvoid grapefruit", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 8, "generic": "Digoxin", "brand": "Digitek / Lanoxin", "drugClass": "Digitalis Glycoside", "indications": "Atrial Fibrillation\nHeart Failure\nSupraventricular Arrhythmias", "dosing": "0.125-0.5mg PO QD", "adverse": "Anorexia, confusion, diarrhea, dizziness, ECG changes, nausea, visual disturbances, weakness (less common)", "counseling": "Take after morning meals\nTaper down\nWatch for bradycardia\nCaution in elderly\nNarrow therapeutic index", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 9, "generic": "Nitroglycerin", "brand": "Nitrostat / Minitran", "drugClass": "Nitrate", "indications": "Angina (prophylaxis and treatment)\nAnal Fissure", "dosing": "0.4mg sublingual PRN (rescue)\nVarious patch/ER formulations for prophylaxis", "adverse": "Headache", "counseling": "Sit before using rescue dose\nAllow 10-12 drug-free hours daily for ER/patch products\nAvoid alcohol/CNS depressants\nAvoid with PDE-5 inhibitors (e.g., sildenafil)\nCall 911 if symptoms persist", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 10, "generic": "Dabigatran", "brand": "Pradaxa", "drugClass": "DOAC — Direct Thrombin Inhibitor", "indications": "DVT / PE Treatment\nStroke Prevention (AFib)", "dosing": "150mg BID or 220mg QD", "adverse": "Dyspepsia, gastritis", "counseling": "D/C before surgery\nDispense in original container; discard 4 months after opening\nAvoid in significant liver/renal dysfunction\nNot for valvular heart disease", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 11, "generic": "Apixaban", "brand": "Eliquis", "drugClass": "DOAC — Factor Xa Inhibitor", "indications": "Atrial Fibrillation\nVTE Prophylaxis and Treatment", "dosing": "2.5-10mg BID depending on indication", "adverse": "Bleeding", "counseling": "Do not stop without talking to provider\nD/C before dental/surgical procedures\nAvoid NSAIDs\nNo specific renal dosing adjustment", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 12, "generic": "Rivaroxaban", "brand": "Xarelto", "drugClass": "DOAC — Factor Xa Inhibitor", "indications": "VTE Treatment/Prophylaxis\nCAD / PAD", "dosing": "10-20mg once or twice daily depending on indication", "adverse": "Bleeding", "counseling": "Take with food\nCan crush tablets\nWatch DDIs\nAvoid use with epidural catheters", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 13, "generic": "Enoxaparin", "brand": "Lovenox", "drugClass": "Low Molecular Weight Heparin (LMWH)", "indications": "VTE Treatment/Prophylaxis\nSTEMI / Unstable Angina", "dosing": "30-40mg SubQ once or twice daily", "adverse": "Anemia, hemorrhage", "counseling": "Standard injection counseling\nMonitor via anti-factor Xa levels\nHigher doses needed in obesity\nCaution with epidural catheters", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 14, "generic": "Clopidogrel", "brand": "Plavix", "drugClass": "Antiplatelet (P2Y12 Inhibitor)", "indications": "STEMI\nSecondary Thrombosis Prophylaxis", "dosing": "75mg QD (higher loading dose for STEMI)", "adverse": "Headache", "counseling": "Watch for bleeding\nDo not stop without talking to provider\nCYP2C19 pharmacogenomics affect response\nD/C before surgery", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}, {"quiz": "Q12", "quizFull": "Q12 — Cardio Pt. 2", "num": 15, "generic": "Warfarin", "brand": "Coumadin", "drugClass": "Anticoagulant (VKORC1 Inhibitor)", "indications": "Anticoagulation (VTE, AFib, Mechanical Valves)", "dosing": "2-10mg PO daily; individualized dosing and monitoring required", "adverse": "Bleeding", "counseling": "Watch for tissue necrosis\nWatch DDIs (many)\nConsistent vitamin K intake\nMonitor INR regularly\nTeratogenic\nAvoid alcohol\nPharmacogenomic implications (CYP2C9, VKORC1)", "quizLabel": "Quiz 12", "quizDetail": "Quiz 12 · Cardio Pt. 2"}];
+
+const QUIZ_LABELS = {
+  Q7: 'Q7 — Asthma & Allergy',
+  Q8: 'Q8 — GI & Ophthalmics',
+  Q9: 'Q9 — GU & Hormones',
+  Q10: 'Q10 — Pain Management',
+  Q11: 'Q11 — Endocrine',
+  Q12: 'Q12 — Cardio Pt. 2',
+};
+
+let activeQuiz = 'ALL';
+let activeQuery = '';
+let expandedKey = null;
+
+const $search = document.getElementById('search');
+const $content = document.getElementById('content');
+const $chips = document.getElementById('chips');
+
+function escapeHTML(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function highlight(text, query) {
+  const safe = escapeHTML(text);
+  if (!query) return safe;
+  const q = query.trim();
+  if (!q) return safe;
+  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp('\\b(' + escaped + ')', 'gi');
+  return safe.replace(re, '<mark>$1</mark>');
+}
+
+function splitLines(s) {
+  return String(s || '').split('\n').map(x => x.trim()).filter(Boolean);
+}
+
+function bulletList(text) {
+  const lines = splitLines(text);
+  if (!lines.length) return '<div class="bullet-row"><span class="dash">—</span><span>—</span></div>';
+  return `<ul class="bullet-list">` + lines.map(l =>
+    `<li class="bullet-row"><span class="dash">—</span><span>${escapeHTML(l)}</span></li>`
+  ).join('') + `</ul>`;
+}
+
+function indicationChips(text) {
+  const lines = splitLines(text);
+  if (!lines.length) return '<div class="bullet-row"><span class="dash">—</span><span>—</span></div>';
+  return `<div class="ind-chips">` + lines.map(l =>
+    `<span class="ind-chip">${escapeHTML(l)}</span>`
+  ).join('') + `</div>`;
+}
+
+function filterDrugs() {
+  const q = activeQuery.trim();
+  let list = DRUGS.filter(d => {
+    if (activeQuiz !== 'ALL' && d.quiz !== activeQuiz) return false;
+    if (!q) return true;
+    // Match start of any word in generic or brand only (not class)
+    const escaped = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const re = new RegExp('\\b' + escaped, 'i');
+    return re.test(d.generic) || re.test(d.brand);
+  });
+  if (q) {
+    const ql = q.toLowerCase();
+    // Sort: generic starts with query (rank 0) > brand starts with query (rank 1) > other (rank 2)
+    list.sort((a, b) => {
+      const rank = (d) => {
+        if (d.generic.toLowerCase().startsWith(ql)) return 0;
+        if (d.brand.toLowerCase().split(/[\s\/,]+/).some(w => w.toLowerCase().startsWith(ql))) return 1;
+        return 2;
+      };
+      const ra = rank(a), rb = rank(b);
+      if (ra !== rb) return ra - rb;
+      return a.generic.localeCompare(b.generic);
+    });
+  }
+  return list;
+}
+
+function renderEmpty() {
+  const total = activeQuiz === 'ALL' ? DRUGS.length : DRUGS.filter(d => d.quiz === activeQuiz).length;
+  const quizzesShown = activeQuiz === 'ALL' ? 6 : 1;
+  return `
+    <div class="empty">
+      <p>Search for any drug above to view its complete profile.</p>
+      <p>Works with generic <em>and</em> brand names.</p>
+      <div class="count">${total} drugs across ${quizzesShown} ${quizzesShown === 1 ? 'quiz' : 'quizzes'}</div>
+    </div>
+  `;
+}
+
+function renderRow(d) {
+  const key = `${d.quiz}-${d.num}`;
+  const q = activeQuery;
+  return `
+    <div class="row" data-key="${key}" tabindex="0" role="button" aria-label="View details for ${escapeHTML(d.generic)}">
+      <div class="row-main">
+        <div class="generic">${highlight(d.generic, q)}</div>
+        <div class="brand">${highlight(d.brand, q)}</div>
+      </div>
+      <div class="quiz-tag">${d.quizLabel}</div>
+    </div>
+  `;
+}
+
+function renderDetailCard(d) {
+  // Brand: if joined by " / ", show as comma-separated for readability
+  const brandDisplay = d.brand.replace(/\s*\/\s*/g, ', ');
+
+  return `
+    <button class="back-link" id="back-link" aria-label="Back to list">← Back to results</button>
+    <article class="drug-card">
+      <header class="card-header">
+        <h2 class="card-title">${escapeHTML(d.generic)}</h2>
+        <div class="card-brand">${escapeHTML(brandDisplay)}</div>
+        <div class="card-tags">
+          <span class="quiz-pill" data-q="${d.quiz}">${escapeHTML(d.quizDetail)}</span>
+          <span class="class-pill" data-q="${d.quiz}">${escapeHTML(d.drugClass.replace(/\n/g, ' · '))}</span>
+        </div>
+      </header>
+      <div class="card-body">
+        <div class="field">
+          <div class="field-label">FDA Indications</div>
+          ${indicationChips(d.indications)}
+        </div>
+        <div class="field-grid">
+          <div class="field">
+            <div class="field-label">Typical Dosing</div>
+            ${bulletList(d.dosing)}
+          </div>
+          <div class="field">
+            <div class="field-label">Adverse Effects</div>
+            ${bulletList(d.adverse)}
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Key Counseling Points</div>
+          ${bulletList(d.counseling)}
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function render() {
+  const showEmptyState = !activeQuery && activeQuiz === 'ALL' && !expandedKey;
+
+  if (showEmptyState) {
+    $content.innerHTML = renderEmpty();
+    return;
+  }
+
+  if (expandedKey) {
+    const drug = DRUGS.find(d => `${d.quiz}-${d.num}` === expandedKey);
+    if (drug) {
+      $content.innerHTML = renderDetailCard(drug);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    } else {
+      expandedKey = null;
+    }
+  }
+
+  const list = filterDrugs();
+  if (list.length === 0) {
+    $content.innerHTML = `
+      <div class="no-results">
+        <div class="x">×</div>
+        <div>No drugs match your search.</div>
+      </div>
+    `;
+    return;
+  }
+
+  const meta = `<div class="results-meta">${list.length} ${list.length === 1 ? 'result' : 'results'}${activeQuiz !== 'ALL' ? ' in ' + QUIZ_LABELS[activeQuiz] : ''}</div>`;
+  $content.innerHTML = meta + '<div class="results">' + list.map(renderRow).join('') + '</div>';
+}
+
+$search.addEventListener('input', e => {
+  activeQuery = e.target.value;
+  expandedKey = null;
+  render();
+});
+
+$search.addEventListener('focus', e => {
+  setTimeout(() => e.target.select(), 0);
+});
+$search.addEventListener('click', e => {
+  e.target.select();
+});
+
+$chips.addEventListener('click', e => {
+  const btn = e.target.closest('.chip');
+  if (!btn) return;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  activeQuiz = btn.dataset.quiz;
+  expandedKey = null;
+  render();
+});
+
+$content.addEventListener('click', e => {
+  if (e.target.closest('#back-link')) {
+    expandedKey = null;
+    render();
+    return;
+  }
+  const row = e.target.closest('.row');
+  if (!row) return;
+  expandedKey = row.dataset.key;
+  render();
+});
+
+$content.addEventListener('keydown', e => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const row = e.target.closest('.row');
+  if (!row) return;
+  e.preventDefault();
+  expandedKey = row.dataset.key;
+  render();
+});
+
+// Browser back button collapses detail view
+window.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && expandedKey) {
+    expandedKey = null;
+    render();
+  }
+});
+
+render();
+</script>
+</body>
+</html>
